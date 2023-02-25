@@ -1,10 +1,9 @@
 import {
   type BrainfuckCommand,
   type BrainfuckCode,
+  type Storage,
 } from "./brainfuckDefinitions";
 import brainfuckParser from "./brainfuckParser";
-
-type Storage = number[];
 
 function getNextCloseBracketIndex(
   parsedSourceCode: string,
@@ -47,7 +46,7 @@ export default function brainfuckInterpreter(
   input: string
 ) {
   const parsedSourceCode = brainfuckParser(sourceCode);
-  const storage: Storage = [...Array(1000000)].map((_) => 0);
+  const storage: Storage = [...Array(100)].map((_) => 0);
   let pointer = 0;
   let codePointer = 0;
   let output = "";
@@ -99,5 +98,5 @@ export default function brainfuckInterpreter(
         break;
     }
   }
-  return output;
+  return { output: output, storage: storage, pointer: pointer };
 }
