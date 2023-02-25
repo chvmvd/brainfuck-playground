@@ -1,6 +1,9 @@
+import {
+  type BrainfuckCommand,
+  type BrainfuckCode,
+} from "./brainfuckDefinitions";
+
 type Storage = number[];
-type BrainfuckCommand = "<" | ">" | "+" | "-" | "." | "," | "[" | "]";
-type BrainfuckCode = string;
 
 function getNextCloseParenIndex(sourceCode: string, codePointer: number) {
   let closeParenCounter = 0;
