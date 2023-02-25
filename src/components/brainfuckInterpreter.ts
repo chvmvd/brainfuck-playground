@@ -1,7 +1,7 @@
 import {
   type BrainfuckCommand,
   type BrainfuckCode,
-  type Storage,
+  type Memory,
 } from "./brainfuckDefinitions";
 import brainfuckParser from "./brainfuckParser";
 
@@ -46,7 +46,7 @@ export default function brainfuckInterpreter(
   input: string
 ) {
   const parsedSourceCode = brainfuckParser(sourceCode);
-  const storage: Storage = [...Array(100)].map((_) => 0);
+  const memory: Memory = [...Array(100)].map((_) => 0);
   let pointer = 0;
   let codePointer = 0;
   let output = "";
@@ -64,24 +64,24 @@ export default function brainfuckInterpreter(
         codePointer++;
         break;
       case "+":
-        storage[pointer]++;
+        memory[pointer]++;
         codePointer++;
         break;
       case "-":
-        storage[pointer]--;
+        memory[pointer]--;
         codePointer++;
         break;
       case ".":
-        output = `${output}${String.fromCharCode(storage[pointer])}`;
+        output = `${output}${String.fromCharCode(memory[pointer])}`;
         codePointer++;
         break;
       case ",":
-        storage[pointer] = input.charCodeAt(0);
+        memory[pointer] = input.charCodeAt(0);
         input = input.slice(1);
         codePointer++;
         break;
       case "[":
-        if (storage[pointer] === 0) {
+        if (memory[pointer] === 0) {
           codePointer =
             getNextCloseBracketIndex(parsedSourceCode, codePointer) + 1;
         } else {
@@ -89,7 +89,7 @@ export default function brainfuckInterpreter(
         }
         break;
       case "]":
-        if (storage[pointer] !== 0) {
+        if (memory[pointer] !== 0) {
           codePointer =
             getPreviousOpenBracketIndex(parsedSourceCode, codePointer) + 1;
         } else {
@@ -98,5 +98,5 @@ export default function brainfuckInterpreter(
         break;
     }
   }
-  return { output: output, storage: storage, pointer: pointer };
+  return { output: output, memory: memory, pointer: pointer };
 }
