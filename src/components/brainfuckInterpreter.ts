@@ -2,17 +2,21 @@ import {
   type BrainfuckCommand,
   type BrainfuckCode,
 } from "./brainfuckDefinitions";
+import brainfuckParser from "./brainfuckParser";
 
 type Storage = number[];
 
-function getNextCloseBracketIndex(sourceCode: string, codePointer: number) {
+function getNextCloseBracketIndex(
+  parsedSourceCode: string,
+  codePointer: number
+) {
   let closeBracketCounter = 0;
   codePointer++;
   while (closeBracketCounter < 1) {
-    if (sourceCode[codePointer] === "[") {
+    if (parsedSourceCode[codePointer] === "[") {
       closeBracketCounter--;
     }
-    if (sourceCode[codePointer] === "]") {
+    if (parsedSourceCode[codePointer] === "]") {
       closeBracketCounter++;
     }
     codePointer++;
@@ -20,14 +24,17 @@ function getNextCloseBracketIndex(sourceCode: string, codePointer: number) {
   return codePointer - 1;
 }
 
-function getPreviousOpenBracketIndex(sourceCode: string, codePointer: number) {
+function getPreviousOpenBracketIndex(
+  parsedSourceCode: string,
+  codePointer: number
+) {
   let openBracketCounter = 0;
   codePointer--;
   while (openBracketCounter < 1) {
-    if (sourceCode[codePointer] === "]") {
+    if (parsedSourceCode[codePointer] === "]") {
       openBracketCounter--;
     }
-    if (sourceCode[codePointer] === "[") {
+    if (parsedSourceCode[codePointer] === "[") {
       openBracketCounter++;
     }
     codePointer--;
@@ -36,15 +43,16 @@ function getPreviousOpenBracketIndex(sourceCode: string, codePointer: number) {
 }
 
 export default function brainfuckInterpreter(
-  sourceCode: BrainfuckCode,
+  sourceCode: string,
   input: string
 ) {
+  const parsedSourceCode = brainfuckParser(sourceCode);
   const storage: Storage = [...Array(1000000)].map((_) => 0);
   let pointer = 0;
   let codePointer = 0;
   let output = "";
-  while (codePointer < sourceCode.length) {
-    const command: BrainfuckCommand = sourceCode[
+  while (codePointer < parsedSourceCode.length) {
+    const command: BrainfuckCommand = parsedSourceCode[
       codePointer
     ] as BrainfuckCommand;
     switch (command) {
@@ -75,7 +83,8 @@ export default function brainfuckInterpreter(
         break;
       case "[":
         if (storage[pointer] === 0) {
-          codePointer = getNextCloseBracketIndex(sourceCode, codePointer) + 1;
+          codePointer =
+            getNextCloseBracketIndex(parsedSourceCode, codePointer) + 1;
         } else {
           codePointer++;
         }
@@ -83,7 +92,7 @@ export default function brainfuckInterpreter(
       case "]":
         if (storage[pointer] !== 0) {
           codePointer =
-            getPreviousOpenBracketIndex(sourceCode, codePointer) + 1;
+            getPreviousOpenBracketIndex(parsedSourceCode, codePointer) + 1;
         } else {
           codePointer++;
         }
