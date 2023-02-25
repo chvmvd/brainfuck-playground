@@ -5,30 +5,30 @@ import {
 
 type Storage = number[];
 
-function getNextCloseParenIndex(sourceCode: string, codePointer: number) {
-  let closeParenCounter = 0;
+function getNextCloseBracketIndex(sourceCode: string, codePointer: number) {
+  let closeBracketCounter = 0;
   codePointer++;
-  while (closeParenCounter < 1) {
+  while (closeBracketCounter < 1) {
     if (sourceCode[codePointer] === "[") {
-      closeParenCounter--;
+      closeBracketCounter--;
     }
     if (sourceCode[codePointer] === "]") {
-      closeParenCounter++;
+      closeBracketCounter++;
     }
     codePointer++;
   }
   return codePointer - 1;
 }
 
-function getPreviousOpenParenIndex(sourceCode: string, codePointer: number) {
-  let openParenCounter = 0;
+function getPreviousOpenBracketIndex(sourceCode: string, codePointer: number) {
+  let openBracketCounter = 0;
   codePointer--;
-  while (openParenCounter < 1) {
+  while (openBracketCounter < 1) {
     if (sourceCode[codePointer] === "]") {
-      openParenCounter--;
+      openBracketCounter--;
     }
     if (sourceCode[codePointer] === "[") {
-      openParenCounter++;
+      openBracketCounter++;
     }
     codePointer--;
   }
@@ -75,14 +75,15 @@ export default function brainfuckInterpreter(
         break;
       case "[":
         if (storage[pointer] === 0) {
-          codePointer = getNextCloseParenIndex(sourceCode, codePointer) + 1;
+          codePointer = getNextCloseBracketIndex(sourceCode, codePointer) + 1;
         } else {
           codePointer++;
         }
         break;
       case "]":
         if (storage[pointer] !== 0) {
-          codePointer = getPreviousOpenParenIndex(sourceCode, codePointer) + 1;
+          codePointer =
+            getPreviousOpenBracketIndex(sourceCode, codePointer) + 1;
         } else {
           codePointer++;
         }
