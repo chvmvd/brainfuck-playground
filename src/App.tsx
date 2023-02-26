@@ -134,6 +134,33 @@ function RunButtonComponent({
   );
 }
 
+function OutputComponent({ output }: { output: string }) {
+  return (
+    <>
+      <Typography variant="h5" component="h2">
+        Output
+      </Typography>
+      <Typography
+        variant="h6"
+        component="div"
+        sx={{
+          p: 1,
+          bgcolor: (theme) =>
+            theme.palette.mode === "dark" ? "#101010" : grey[100],
+          color: (theme) =>
+            theme.palette.mode === "dark" ? grey[300] : grey[800],
+          border: "1px solid",
+          borderColor: (theme) =>
+            theme.palette.mode === "dark" ? grey[800] : grey[300],
+          borderRadius: 2,
+        }}
+      >
+        {output}
+      </Typography>
+    </>
+  );
+}
+
 function App() {
   const [sourceCode, setSourceCode] = useState<string>("");
   const [syntaxStatus, setSyntaxStatus] = useState<BrainfuckSyntaxStatus>("OK");
@@ -169,28 +196,7 @@ function App() {
           </Stack>
         </Stack>
         <Stack spacing={1}>
-          <Box>
-            <Typography variant="h5" component="h2">
-              Output
-            </Typography>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                p: 1,
-                bgcolor: (theme) =>
-                  theme.palette.mode === "dark" ? "#101010" : grey[100],
-                color: (theme) =>
-                  theme.palette.mode === "dark" ? grey[300] : grey[800],
-                border: "1px solid",
-                borderColor: (theme) =>
-                  theme.palette.mode === "dark" ? grey[800] : grey[300],
-                borderRadius: 2,
-              }}
-            >
-              {output}
-            </Typography>
-          </Box>
+          <OutputComponent output={output} />
           <Box>
             <Typography variant="h5" component="h2">
               Memory
