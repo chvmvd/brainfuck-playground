@@ -14,8 +14,15 @@ import {
   Button,
   Box,
   Stack,
+  Paper,
+  TableContainer,
+  Table,
+  TableBody,
+  TableRow,
+  TableCell,
 } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import { grey, blue } from "@mui/material/colors";
 
 function App() {
   const [sourceCode, setSourceCode] = useState<string>("");
@@ -104,39 +111,51 @@ function App() {
           sx={{
             p: 1,
             bgcolor: (theme) =>
-              theme.palette.mode === "dark" ? "#101010" : "grey.100",
+              theme.palette.mode === "dark" ? "#101010" : grey[100],
             color: (theme) =>
-              theme.palette.mode === "dark" ? "grey.300" : "grey.800",
+              theme.palette.mode === "dark" ? grey[300] : grey[800],
             border: "1px solid",
             borderColor: (theme) =>
-              theme.palette.mode === "dark" ? "grey.800" : "grey.300",
+              theme.palette.mode === "dark" ? grey[800] : grey[300],
             borderRadius: 2,
           }}
         >
           {output}
         </Typography>
       </Box>
-      <div>
-        <span>Memory</span>
-        <table>
-          <tbody>
-            {[...Array(10)].map((_, i) => (
-              <tr key={i}>
-                {[...Array(10)].map((_, j) => (
-                  <td
-                    key={i * 10 + j}
-                    style={{
-                      color: i * 10 + j === pointer ? "skyblue" : "black",
-                    }}
-                  >
-                    {memory[i * 10 + j]}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Box>
+        <Typography variant="h5" component="h2">
+          Memory
+        </Typography>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableBody>
+              {[...Array(5)].map((_, i) => (
+                <TableRow key={i}>
+                  <TableCell component="th">{`${i * 20}...${
+                    (i + 1) * 20 - 1
+                  }`}</TableCell>
+                  {[...Array(20)].map((_, j) => (
+                    <TableCell
+                      key={i * 20 + j}
+                      sx={{
+                        bgcolor: (theme) =>
+                          i * 20 + j === pointer
+                            ? theme.palette.mode === "dark"
+                              ? blue[800]
+                              : blue[100]
+                            : "transparent",
+                      }}
+                    >
+                      {memory[i * 20 + j]}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>
     </>
   );
 }
