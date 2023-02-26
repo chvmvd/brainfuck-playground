@@ -94,10 +94,28 @@ function App() {
           </Button>
         </Stack>
       </Stack>
-      <div>
-        <span>Output:</span>
-        {output}
-      </div>
+      <Box>
+        <Typography variant="h5" component="h2">
+          Output
+        </Typography>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={{
+            p: 1,
+            bgcolor: (theme) =>
+              theme.palette.mode === "dark" ? "#101010" : "grey.100",
+            color: (theme) =>
+              theme.palette.mode === "dark" ? "grey.300" : "grey.800",
+            border: "1px solid",
+            borderColor: (theme) =>
+              theme.palette.mode === "dark" ? "grey.800" : "grey.300",
+            borderRadius: 2,
+          }}
+        >
+          {output}
+        </Typography>
+      </Box>
       <div>
         <span>Memory</span>
         <table>
