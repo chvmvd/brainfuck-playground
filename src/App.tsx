@@ -72,13 +72,13 @@ function AppBarComponent() {
                 <TableBody>
                   <TableRow>
                     <TableCell>
-                      <code>&lt;</code>
+                      <code>&gt;</code>
                     </TableCell>
                     <TableCell>Increment the data pointer.</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>
-                      <code>&gt;</code>
+                      <code>&lt;</code>
                     </TableCell>
                     <TableCell>Decrement the data pointer.</TableCell>
                   </TableRow>
