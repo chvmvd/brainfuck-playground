@@ -76,6 +76,31 @@ function ProgramComponent({
   );
 }
 
+function InputComponent({
+  input,
+  setInput,
+}: {
+  input: string;
+  setInput: Dispatch<SetStateAction<string>>;
+}) {
+  return (
+    <>
+      <Typography variant="h5" component="h2">
+        Input
+      </Typography>
+      <TextField
+        variant="outlined"
+        placeholder="Write your input here."
+        fullWidth
+        value={input}
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
+      />
+    </>
+  );
+}
+
 function App() {
   const [sourceCode, setSourceCode] = useState<string>("");
   const [syntaxStatus, setSyntaxStatus] = useState<BrainfuckSyntaxStatus>("OK");
@@ -99,18 +124,7 @@ function App() {
           />
           <Stack direction="row" spacing={2} alignItems="flex-end">
             <Box flexGrow={1}>
-              <Typography variant="h5" component="h2">
-                Input
-              </Typography>
-              <TextField
-                variant="outlined"
-                placeholder="Write your input here."
-                fullWidth
-                value={input}
-                onChange={(e) => {
-                  setInput(e.target.value);
-                }}
-              />
+              <InputComponent input={input} setInput={setInput} />
             </Box>
             <Button
               variant="contained"
