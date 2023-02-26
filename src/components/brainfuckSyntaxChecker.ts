@@ -1,12 +1,11 @@
-import { type BrainfuckCode } from "./brainfuckDefinitions";
+import {
+  type BrainfuckSyntaxStatus,
+  type BrainfuckCode,
+} from "./brainfuckDefinitions";
 
 export default function brainfuckSyntaxChecker(
   sourceCode: BrainfuckCode
-):
-  | "Too many open bracket!"
-  | "Too many close bracket!"
-  | "bracket mismatch!"
-  | "OK" {
+): BrainfuckSyntaxStatus {
   let openBracketCount = (sourceCode.match(/\[/g) || []).length;
   let closeBracketCount = (sourceCode.match(/\]/g) || []).length;
   if (openBracketCount > closeBracketCount) return "Too many open bracket!";
