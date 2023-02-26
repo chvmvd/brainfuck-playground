@@ -1,6 +1,7 @@
 import { useState, useEffect, type Dispatch, type SetStateAction } from "react";
 import {
   type BrainfuckSyntaxStatus,
+  defaultMemory,
   type Memory,
 } from "./components/brainfuckDefinitions";
 import brainfuckInterpreter from "./components/brainfuckInterpreter";
@@ -210,7 +211,7 @@ function App() {
   const [syntaxStatus, setSyntaxStatus] = useState<BrainfuckSyntaxStatus>("OK");
   const [input, setInput] = useState<string>("");
   const [output, setOutput] = useState<string>("");
-  const [memory, setMemory] = useState<Memory>([]);
+  const [memory, setMemory] = useState<Memory>(defaultMemory);
   const [pointer, setPointer] = useState<number>(0);
   useEffect(() => {
     setSyntaxStatus(brainfuckSyntaxChecker(sourceCode));

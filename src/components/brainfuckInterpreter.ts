@@ -1,6 +1,6 @@
 import {
   type BrainfuckCommand,
-  type BrainfuckCode,
+  defaultMemory,
   type Memory,
 } from "./brainfuckDefinitions";
 import brainfuckParser from "./brainfuckParser";
@@ -46,7 +46,7 @@ export default function brainfuckInterpreter(
   input: string
 ) {
   const parsedSourceCode = brainfuckParser(sourceCode);
-  const memory: Memory = [...Array(100)].map((_) => 0);
+  const memory: Memory = defaultMemory;
   let pointer = 0;
   let codePointer = 0;
   let output = "";

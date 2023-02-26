@@ -1,6 +1,7 @@
 export const brainfuckCommand = ["<", ">", "+", "-", ".", ",", "[", "]"];
 export type BrainfuckCommand = "<" | ">" | "+" | "-" | "." | "," | "[" | "]";
 export type BrainfuckCode = string;
+export const defaultMemory = [...Array(100)].map((_) => 0);
 export type Memory = number[];
 export type BrainfuckSyntaxStatus =
   | "OK"
