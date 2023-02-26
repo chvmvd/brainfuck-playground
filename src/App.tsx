@@ -44,51 +44,55 @@ function App() {
         </Toolbar>
       </AppBar>
       <Toolbar />
-      <Typography variant="h5" component="h2">
-        Program
-      </Typography>
-      <TextField
-        variant="outlined"
-        error={syntaxStatus === "OK" ? false : true}
-        helperText={syntaxStatus === "OK" ? "" : syntaxStatus}
-        placeholder="Write your code here."
-        multiline
-        rows={10}
-        fullWidth
-        value={sourceCode}
-        onChange={(e) => {
-          setSourceCode(e.target.value);
-        }}
-      />
-      <Stack direction="row" spacing={2} alignItems="flex-end">
-        <Box sx={{ flexGrow: 1 }}>
+      <Stack spacing={1}>
+        <Box>
           <Typography variant="h5" component="h2">
-            Input
+            Program
           </Typography>
           <TextField
             variant="outlined"
-            placeholder="Write your input here."
+            error={syntaxStatus === "OK" ? false : true}
+            helperText={syntaxStatus === "OK" ? "" : syntaxStatus}
+            placeholder="Write your code here."
+            multiline
+            rows={10}
             fullWidth
-            value={input}
+            value={sourceCode}
             onChange={(e) => {
-              setInput(e.target.value);
+              setSourceCode(e.target.value);
             }}
           />
         </Box>
-        <Button
-          variant="contained"
-          size="large"
-          onClick={() => {
-            if (brainfuckSyntaxChecker(sourceCode) === "OK") {
-              const result = brainfuckInterpreter(sourceCode, input);
-              setOutput(result.output);
-              setMemory(result.memory);
-              setPointer(result.pointer);
-            }
-          }}
-        >
-          Run
-        </Button>
+        <Stack direction="row" spacing={2} alignItems="flex-end">
+          <Box sx={{ flexGrow: 1 }}>
+            <Typography variant="h5" component="h2">
+              Input
+            </Typography>
+            <TextField
+              variant="outlined"
+              placeholder="Write your input here."
+              fullWidth
+              value={input}
+              onChange={(e) => {
+                setInput(e.target.value);
+              }}
+            />
+          </Box>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => {
+              if (brainfuckSyntaxChecker(sourceCode) === "OK") {
+                const result = brainfuckInterpreter(sourceCode, input);
+                setOutput(result.output);
+                setMemory(result.memory);
+                setPointer(result.pointer);
+              }
+            }}
+          >
+            Run
+          </Button>
+        </Stack>
       </Stack>
       <div>
         <span>Output:</span>
