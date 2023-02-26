@@ -1,12 +1,13 @@
 import {
   type BrainfuckCommand,
+  BrainfuckCode,
   defaultMemory,
   type Memory,
 } from "./brainfuckDefinitions";
 import brainfuckParser from "./brainfuckParser";
 
 function getNextCloseBracketIndex(
-  parsedSourceCode: string,
+  parsedSourceCode: BrainfuckCode,
   codePointer: number
 ) {
   let closeBracketCounter = 0;
@@ -24,7 +25,7 @@ function getNextCloseBracketIndex(
 }
 
 function getPreviousOpenBracketIndex(
-  parsedSourceCode: string,
+  parsedSourceCode: BrainfuckCode,
   codePointer: number
 ) {
   let openBracketCounter = 0;
