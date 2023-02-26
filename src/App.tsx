@@ -2,6 +2,8 @@ import { useState } from "react";
 import { type Memory } from "./components/brainfuckDefinitions";
 import brainfuckInterpreter from "./components/brainfuckInterpreter";
 import brainfuckSyntaxChecker from "./components/brainfuckSyntaxChecker";
+import { AppBar, Toolbar, Typography, IconButton } from "@mui/material";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 function App() {
   const [sourceCode, setSourceCode] = useState<string>("");
@@ -11,6 +13,21 @@ function App() {
   const [pointer, setPointer] = useState<number>(0);
   return (
     <>
+      <AppBar>
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Brainfuck Playground
+          </Typography>
+          <IconButton
+            color="inherit"
+            href="https://github.com/chvmvd/brainfuck-playground"
+            size="large"
+          >
+            <GitHubIcon fontSize="inherit" />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+      <Toolbar />
       <input
         type="text"
         value={sourceCode}
