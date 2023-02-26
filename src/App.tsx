@@ -11,6 +11,9 @@ import {
   Typography,
   IconButton,
   TextField,
+  Button,
+  Box,
+  Stack,
 } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
@@ -57,25 +60,36 @@ function App() {
           setSourceCode(e.target.value);
         }}
       />
-      <input
-        type="text"
-        value={input}
-        onChange={(e) => {
-          setInput(e.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          if (brainfuckSyntaxChecker(sourceCode) === "OK") {
-            const result = brainfuckInterpreter(sourceCode, input);
-            setOutput(result.output);
-            setMemory(result.memory);
-            setPointer(result.pointer);
-          }
-        }}
-      >
-        Run
-      </button>
+      <Stack direction="row" spacing={2} alignItems="flex-end">
+        <Box sx={{ flexGrow: 1 }}>
+          <Typography variant="h5" component="h2">
+            Input
+          </Typography>
+          <TextField
+            variant="outlined"
+            placeholder="Write your input here."
+            fullWidth
+            value={input}
+            onChange={(e) => {
+              setInput(e.target.value);
+            }}
+          />
+        </Box>
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => {
+            if (brainfuckSyntaxChecker(sourceCode) === "OK") {
+              const result = brainfuckInterpreter(sourceCode, input);
+              setOutput(result.output);
+              setMemory(result.memory);
+              setPointer(result.pointer);
+            }
+          }}
+        >
+          Run
+        </Button>
+      </Stack>
       <div>
         <span>Output:</span>
         {output}
