@@ -51,111 +51,115 @@ function App() {
         </Toolbar>
       </AppBar>
       <Toolbar />
-      <Stack spacing={1}>
-        <Box>
-          <Typography variant="h5" component="h2">
-            Program
-          </Typography>
-          <TextField
-            variant="outlined"
-            error={syntaxStatus === "OK" ? false : true}
-            helperText={syntaxStatus === "OK" ? "" : syntaxStatus}
-            placeholder="Write your code here."
-            multiline
-            rows={10}
-            fullWidth
-            value={sourceCode}
-            onChange={(e) => {
-              setSourceCode(e.target.value);
-            }}
-          />
-        </Box>
-        <Stack direction="row" spacing={2} alignItems="flex-end">
-          <Box flexGrow={1}>
+      <Stack spacing={2}>
+        <Stack spacing={1}>
+          <Box>
             <Typography variant="h5" component="h2">
-              Input
+              Program
             </Typography>
             <TextField
               variant="outlined"
-              placeholder="Write your input here."
+              error={syntaxStatus === "OK" ? false : true}
+              helperText={syntaxStatus === "OK" ? "" : syntaxStatus}
+              placeholder="Write your code here."
+              multiline
+              rows={10}
               fullWidth
-              value={input}
+              value={sourceCode}
               onChange={(e) => {
-                setInput(e.target.value);
+                setSourceCode(e.target.value);
               }}
             />
           </Box>
-          <Button
-            variant="contained"
-            size="large"
-            onClick={() => {
-              if (brainfuckSyntaxChecker(sourceCode) === "OK") {
-                const result = brainfuckInterpreter(sourceCode, input);
-                setOutput(result.output);
-                setMemory(result.memory);
-                setPointer(result.pointer);
-              }
-            }}
-          >
-            Run
-          </Button>
+          <Stack direction="row" spacing={2} alignItems="flex-end">
+            <Box flexGrow={1}>
+              <Typography variant="h5" component="h2">
+                Input
+              </Typography>
+              <TextField
+                variant="outlined"
+                placeholder="Write your input here."
+                fullWidth
+                value={input}
+                onChange={(e) => {
+                  setInput(e.target.value);
+                }}
+              />
+            </Box>
+            <Button
+              variant="contained"
+              size="large"
+              onClick={() => {
+                if (brainfuckSyntaxChecker(sourceCode) === "OK") {
+                  const result = brainfuckInterpreter(sourceCode, input);
+                  setOutput(result.output);
+                  setMemory(result.memory);
+                  setPointer(result.pointer);
+                }
+              }}
+            >
+              Run
+            </Button>
+          </Stack>
+        </Stack>
+        <Stack spacing={1}>
+          <Box>
+            <Typography variant="h5" component="h2">
+              Output
+            </Typography>
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{
+                p: 1,
+                bgcolor: (theme) =>
+                  theme.palette.mode === "dark" ? "#101010" : grey[100],
+                color: (theme) =>
+                  theme.palette.mode === "dark" ? grey[300] : grey[800],
+                border: "1px solid",
+                borderColor: (theme) =>
+                  theme.palette.mode === "dark" ? grey[800] : grey[300],
+                borderRadius: 2,
+              }}
+            >
+              {output}
+            </Typography>
+          </Box>
+          <Box>
+            <Typography variant="h5" component="h2">
+              Memory
+            </Typography>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableBody>
+                  {[...Array(5)].map((_, i) => (
+                    <TableRow key={i}>
+                      <TableCell component="th">{`${i * 20}...${
+                        (i + 1) * 20 - 1
+                      }`}</TableCell>
+                      {[...Array(20)].map((_, j) => (
+                        <TableCell
+                          key={i * 20 + j}
+                          sx={{
+                            bgcolor: (theme) =>
+                              i * 20 + j === pointer
+                                ? theme.palette.mode === "dark"
+                                  ? blue[800]
+                                  : blue[100]
+                                : "transparent",
+                          }}
+                        >
+                          {memory[i * 20 + j]}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Box>
         </Stack>
       </Stack>
-      <Box>
-        <Typography variant="h5" component="h2">
-          Output
-        </Typography>
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{
-            p: 1,
-            bgcolor: (theme) =>
-              theme.palette.mode === "dark" ? "#101010" : grey[100],
-            color: (theme) =>
-              theme.palette.mode === "dark" ? grey[300] : grey[800],
-            border: "1px solid",
-            borderColor: (theme) =>
-              theme.palette.mode === "dark" ? grey[800] : grey[300],
-            borderRadius: 2,
-          }}
-        >
-          {output}
-        </Typography>
-      </Box>
-      <Box>
-        <Typography variant="h5" component="h2">
-          Memory
-        </Typography>
-        <TableContainer component={Paper}>
-          <Table>
-            <TableBody>
-              {[...Array(5)].map((_, i) => (
-                <TableRow key={i}>
-                  <TableCell component="th">{`${i * 20}...${
-                    (i + 1) * 20 - 1
-                  }`}</TableCell>
-                  {[...Array(20)].map((_, j) => (
-                    <TableCell
-                      key={i * 20 + j}
-                      sx={{
-                        bgcolor: (theme) =>
-                          i * 20 + j === pointer
-                            ? theme.palette.mode === "dark"
-                              ? blue[800]
-                              : blue[100]
-                            : "transparent",
-                      }}
-                    >
-                      {memory[i * 20 + j]}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Box>
     </>
   );
 }
