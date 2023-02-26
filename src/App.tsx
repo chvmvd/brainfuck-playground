@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type Dispatch, type SetStateAction } from "react";
 import {
   type BrainfuckSyntaxStatus,
   type Memory,
@@ -24,9 +24,6 @@ import {
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { grey, blue } from "@mui/material/colors";
 
-/**
- * a component of AppBar
- */
 function AppBarComponent() {
   return (
     <>
@@ -48,6 +45,37 @@ function AppBarComponent() {
   );
 }
 
+function ProgramComponent({
+  syntaxStatus,
+  sourceCode,
+  setSourceCode,
+}: {
+  syntaxStatus: BrainfuckSyntaxStatus;
+  sourceCode: string;
+  setSourceCode: Dispatch<SetStateAction<string>>;
+}) {
+  return (
+    <>
+      <Typography variant="h5" component="h2">
+        Program
+      </Typography>
+      <TextField
+        variant="outlined"
+        error={syntaxStatus === "OK" ? false : true}
+        helperText={syntaxStatus === "OK" ? "" : syntaxStatus}
+        placeholder="Write your code here."
+        multiline
+        rows={10}
+        fullWidth
+        value={sourceCode}
+        onChange={(e) => {
+          setSourceCode(e.target.value);
+        }}
+      />
+    </>
+  );
+}
+
 function App() {
   const [sourceCode, setSourceCode] = useState<string>("");
   const [syntaxStatus, setSyntaxStatus] = useState<BrainfuckSyntaxStatus>("OK");
@@ -64,24 +92,11 @@ function App() {
       <Toolbar />
       <Stack spacing={2}>
         <Stack spacing={1}>
-          <Box>
-            <Typography variant="h5" component="h2">
-              Program
-            </Typography>
-            <TextField
-              variant="outlined"
-              error={syntaxStatus === "OK" ? false : true}
-              helperText={syntaxStatus === "OK" ? "" : syntaxStatus}
-              placeholder="Write your code here."
-              multiline
-              rows={10}
-              fullWidth
-              value={sourceCode}
-              onChange={(e) => {
-                setSourceCode(e.target.value);
-              }}
-            />
-          </Box>
+          <ProgramComponent
+            syntaxStatus={syntaxStatus}
+            sourceCode={sourceCode}
+            setSourceCode={setSourceCode}
+          />
           <Stack direction="row" spacing={2} alignItems="flex-end">
             <Box flexGrow={1}>
               <Typography variant="h5" component="h2">
