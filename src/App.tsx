@@ -161,6 +161,50 @@ function OutputComponent({ output }: { output: string }) {
   );
 }
 
+function MemoryComponent({
+  memory,
+  pointer,
+}: {
+  memory: Memory;
+  pointer: number;
+}) {
+  return (
+    <>
+      <Typography variant="h5" component="h2">
+        Memory
+      </Typography>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableBody>
+            {[...Array(5)].map((_, i) => (
+              <TableRow key={i}>
+                <TableCell component="th">{`${i * 20}...${
+                  (i + 1) * 20 - 1
+                }`}</TableCell>
+                {[...Array(20)].map((_, j) => (
+                  <TableCell
+                    key={i * 20 + j}
+                    sx={{
+                      bgcolor: (theme) =>
+                        i * 20 + j === pointer
+                          ? theme.palette.mode === "dark"
+                            ? blue[800]
+                            : blue[100]
+                          : "transparent",
+                    }}
+                  >
+                    {memory[i * 20 + j]}
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
+  );
+}
+
 function App() {
   const [sourceCode, setSourceCode] = useState<string>("");
   const [syntaxStatus, setSyntaxStatus] = useState<BrainfuckSyntaxStatus>("OK");
@@ -197,39 +241,7 @@ function App() {
         </Stack>
         <Stack spacing={1}>
           <OutputComponent output={output} />
-          <Box>
-            <Typography variant="h5" component="h2">
-              Memory
-            </Typography>
-            <TableContainer component={Paper}>
-              <Table>
-                <TableBody>
-                  {[...Array(5)].map((_, i) => (
-                    <TableRow key={i}>
-                      <TableCell component="th">{`${i * 20}...${
-                        (i + 1) * 20 - 1
-                      }`}</TableCell>
-                      {[...Array(20)].map((_, j) => (
-                        <TableCell
-                          key={i * 20 + j}
-                          sx={{
-                            bgcolor: (theme) =>
-                              i * 20 + j === pointer
-                                ? theme.palette.mode === "dark"
-                                  ? blue[800]
-                                  : blue[100]
-                                : "transparent",
-                          }}
-                        >
-                          {memory[i * 20 + j]}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Box>
+          <MemoryComponent memory={memory} pointer={pointer} />
         </Stack>
       </Stack>
     </>
