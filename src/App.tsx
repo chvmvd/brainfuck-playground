@@ -220,31 +220,33 @@ function App() {
     <>
       <AppBarComponent />
       <Toolbar />
-      <Stack spacing={2}>
-        <Stack spacing={1}>
-          <ProgramComponent
-            syntaxStatus={syntaxStatus}
-            sourceCode={sourceCode}
-            setSourceCode={setSourceCode}
-          />
-          <Stack direction="row" spacing={2} alignItems="flex-end">
-            <Box flexGrow={1}>
-              <InputComponent input={input} setInput={setInput} />
-            </Box>
-            <RunButtonComponent
+      <Box sx={{ m: 2 }}>
+        <Stack spacing={2}>
+          <Stack spacing={1}>
+            <ProgramComponent
+              syntaxStatus={syntaxStatus}
               sourceCode={sourceCode}
-              input={input}
-              setOutput={setOutput}
-              setMemory={setMemory}
-              setPointer={setPointer}
+              setSourceCode={setSourceCode}
             />
+            <Stack direction="row" spacing={2} alignItems="flex-end">
+              <Box flexGrow={1}>
+                <InputComponent input={input} setInput={setInput} />
+              </Box>
+              <RunButtonComponent
+                sourceCode={sourceCode}
+                input={input}
+                setOutput={setOutput}
+                setMemory={setMemory}
+                setPointer={setPointer}
+              />
+            </Stack>
+          </Stack>
+          <Stack spacing={1}>
+            <OutputComponent output={output} />
+            <MemoryComponent memory={memory} pointer={pointer} />
           </Stack>
         </Stack>
-        <Stack spacing={1}>
-          <OutputComponent output={output} />
-          <MemoryComponent memory={memory} pointer={pointer} />
-        </Stack>
-      </Stack>
+      </Box>
     </>
   );
 }
