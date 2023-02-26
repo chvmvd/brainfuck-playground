@@ -101,6 +101,39 @@ function InputComponent({
   );
 }
 
+function RunButtonComponent({
+  sourceCode,
+  input,
+  setOutput,
+  setMemory,
+  setPointer,
+}: {
+  sourceCode: string;
+  input: string;
+  setOutput: Dispatch<SetStateAction<string>>;
+  setMemory: Dispatch<SetStateAction<Memory>>;
+  setPointer: Dispatch<SetStateAction<number>>;
+}) {
+  return (
+    <>
+      <Button
+        variant="contained"
+        size="large"
+        onClick={() => {
+          if (brainfuckSyntaxChecker(sourceCode) === "OK") {
+            const result = brainfuckInterpreter(sourceCode, input);
+            setOutput(result.output);
+            setMemory(result.memory);
+            setPointer(result.pointer);
+          }
+        }}
+      >
+        Run
+      </Button>
+    </>
+  );
+}
+
 function App() {
   const [sourceCode, setSourceCode] = useState<string>("");
   const [syntaxStatus, setSyntaxStatus] = useState<BrainfuckSyntaxStatus>("OK");
@@ -126,20 +159,13 @@ function App() {
             <Box flexGrow={1}>
               <InputComponent input={input} setInput={setInput} />
             </Box>
-            <Button
-              variant="contained"
-              size="large"
-              onClick={() => {
-                if (brainfuckSyntaxChecker(sourceCode) === "OK") {
-                  const result = brainfuckInterpreter(sourceCode, input);
-                  setOutput(result.output);
-                  setMemory(result.memory);
-                  setPointer(result.pointer);
-                }
-              }}
-            >
-              Run
-            </Button>
+            <RunButtonComponent
+              sourceCode={sourceCode}
+              input={input}
+              setOutput={setOutput}
+              setMemory={setMemory}
+              setPointer={setPointer}
+            />
           </Stack>
         </Stack>
         <Stack spacing={1}>
