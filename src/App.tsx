@@ -211,7 +211,7 @@ function App() {
   const [syntaxStatus, setSyntaxStatus] = useState<BrainfuckSyntaxStatus>("OK");
   const [input, setInput] = useState<string>("");
   const [output, setOutput] = useState<string>("");
-  const [memory, setMemory] = useState<Memory>(defaultMemory);
+  const [memory, setMemory] = useState<Memory>([...defaultMemory]);
   const [pointer, setPointer] = useState<number>(0);
   useEffect(() => {
     setSyntaxStatus(brainfuckSyntaxChecker(sourceCode));

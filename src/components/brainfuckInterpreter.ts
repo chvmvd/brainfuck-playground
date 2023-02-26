@@ -47,7 +47,7 @@ export default function brainfuckInterpreter(
   input: string
 ) {
   const parsedSourceCode = brainfuckParser(sourceCode);
-  const memory: Memory = defaultMemory;
+  const memory: Memory = [...defaultMemory];
   let pointer = 0;
   let codePointer = 0;
   let output = "";
