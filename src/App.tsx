@@ -11,21 +11,26 @@ import {
   Toolbar,
   Typography,
   IconButton,
+  Dialog,
+  DialogTitle,
+  Paper,
+  TableContainer,
+  Table,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
   TextField,
   Button,
   Box,
   Stack,
-  Paper,
-  TableContainer,
-  Table,
-  TableBody,
-  TableRow,
-  TableCell,
 } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import { grey, blue } from "@mui/material/colors";
 
 function AppBarComponent() {
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <>
       <AppBar>
@@ -40,6 +45,98 @@ function AppBarComponent() {
           >
             <GitHubIcon fontSize="inherit" />
           </IconButton>
+          <IconButton
+            color="inherit"
+            size="large"
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            <HelpOutlineOutlinedIcon fontSize="inherit" />
+          </IconButton>
+          <Dialog
+            open={open}
+            onClose={() => {
+              setOpen(false);
+            }}
+          >
+            <DialogTitle>Available Commands</DialogTitle>
+            <TableContainer component={Paper}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Character</TableCell>
+                    <TableCell>Meaning</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>
+                      <code>&lt;</code>
+                    </TableCell>
+                    <TableCell>Increment the data pointer.</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <code>&gt;</code>
+                    </TableCell>
+                    <TableCell>Decrement the data pointer.</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <code>+</code>
+                    </TableCell>
+                    <TableCell>
+                      Increment the byte at the data pointer.
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <code>-</code>
+                    </TableCell>
+                    <TableCell>
+                      Decrement the byte at the data pointer.
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <code>.</code>
+                    </TableCell>
+                    <TableCell>Output the byte at the data pointer.</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <code>,</code>
+                    </TableCell>
+                    <TableCell>
+                      Receive one byte from input and store it in the byte at
+                      the data pointer.
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <code>[</code>
+                    </TableCell>
+                    <TableCell>
+                      If the byte at the data pointer is zero, jump the
+                      instruction pointer forward to the command after the
+                      matching <code>]</code> command.
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <code>]</code>
+                    </TableCell>
+                    <TableCell>
+                      If the byte at the data pointer is nonzero, jump the
+                      instruction pointer back to the command after the matching{" "}
+                      <code>[</code> command.
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </TableContainer>
+          </Dialog>
         </Toolbar>
       </AppBar>
     </>
