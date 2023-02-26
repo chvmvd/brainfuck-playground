@@ -24,6 +24,30 @@ import {
 import GitHubIcon from "@mui/icons-material/GitHub";
 import { grey, blue } from "@mui/material/colors";
 
+/**
+ * a component of AppBar
+ */
+function AppBarComponent() {
+  return (
+    <>
+      <AppBar>
+        <Toolbar>
+          <Typography variant="h5" component="h1" flexGrow={1}>
+            Brainfuck Playground
+          </Typography>
+          <IconButton
+            color="inherit"
+            size="large"
+            href="https://github.com/chvmvd/brainfuck-playground"
+          >
+            <GitHubIcon fontSize="inherit" />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    </>
+  );
+}
+
 function App() {
   const [sourceCode, setSourceCode] = useState<string>("");
   const [syntaxStatus, setSyntaxStatus] = useState<BrainfuckSyntaxStatus>("OK");
@@ -36,20 +60,7 @@ function App() {
   }, [sourceCode]);
   return (
     <>
-      <AppBar>
-        <Toolbar>
-          <Typography variant="h5" component="h1" flexGrow={1}>
-            Brainfuck Playground
-          </Typography>
-          <IconButton
-            color="inherit"
-            href="https://github.com/chvmvd/brainfuck-playground"
-            size="large"
-          >
-            <GitHubIcon fontSize="inherit" />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+      <AppBarComponent />
       <Toolbar />
       <Stack spacing={2}>
         <Stack spacing={1}>
