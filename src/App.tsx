@@ -31,7 +31,7 @@ function App() {
     <>
       <AppBar>
         <Toolbar>
-          <Typography variant="h5" component="h1" sx={{ flexGrow: 1 }}>
+          <Typography variant="h5" component="h1" flexGrow={1}>
             Brainfuck Playground
           </Typography>
           <IconButton
@@ -64,7 +64,7 @@ function App() {
           />
         </Box>
         <Stack direction="row" spacing={2} alignItems="flex-end">
-          <Box sx={{ flexGrow: 1 }}>
+          <Box flexGrow={1}>
             <Typography variant="h5" component="h2">
               Input
             </Typography>
