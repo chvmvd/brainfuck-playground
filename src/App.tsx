@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
+  brainfuckCommand,
   type BrainfuckSyntaxStatus,
   defaultMemory,
   type Memory,
@@ -27,7 +28,10 @@ function App(): JSX.Element {
   }, [sourceCode]);
   return (
     <>
-      <AppBarComponent />
+      <AppBarComponent
+        GitHubUrl="https://github.com/chvmvd/brainfuck-playground"
+        availableCommands={brainfuckCommand}
+      />
       <Toolbar />
       <Box sx={{ m: 2 }}>
         <Stack spacing={2}>

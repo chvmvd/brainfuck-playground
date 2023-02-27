@@ -26,7 +26,13 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import { grey, blue } from "@mui/material/colors";
 
-export function AppBarComponent(): JSX.Element {
+export function AppBarComponent({
+  GitHubUrl,
+  availableCommands,
+}: {
+  GitHubUrl: string;
+  availableCommands: string[];
+}): JSX.Element {
   const [open, setOpen] = useState<boolean>(false);
   return (
     <>
@@ -35,11 +41,7 @@ export function AppBarComponent(): JSX.Element {
           <Typography variant="h5" component="h1" flexGrow={1}>
             Brainfuck Playground
           </Typography>
-          <IconButton
-            color="inherit"
-            size="large"
-            href="https://github.com/chvmvd/brainfuck-playground"
-          >
+          <IconButton color="inherit" size="large" href={GitHubUrl}>
             <GitHubIcon fontSize="inherit" />
           </IconButton>
           <IconButton
@@ -69,19 +71,19 @@ export function AppBarComponent(): JSX.Element {
                 <TableBody>
                   <TableRow>
                     <TableCell>
-                      <code>&gt;</code>
+                      <code>{availableCommands[0]}</code>
                     </TableCell>
                     <TableCell>Increment the data pointer.</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>
-                      <code>&lt;</code>
+                      <code>{availableCommands[1]}</code>
                     </TableCell>
                     <TableCell>Decrement the data pointer.</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>
-                      <code>+</code>
+                      <code>{availableCommands[2]}</code>
                     </TableCell>
                     <TableCell>
                       Increment the byte at the data pointer.
@@ -89,7 +91,7 @@ export function AppBarComponent(): JSX.Element {
                   </TableRow>
                   <TableRow>
                     <TableCell>
-                      <code>-</code>
+                      <code>{availableCommands[3]}</code>
                     </TableCell>
                     <TableCell>
                       Decrement the byte at the data pointer.
@@ -97,13 +99,13 @@ export function AppBarComponent(): JSX.Element {
                   </TableRow>
                   <TableRow>
                     <TableCell>
-                      <code>.</code>
+                      <code>{availableCommands[4]}</code>
                     </TableCell>
                     <TableCell>Output the byte at the data pointer.</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>
-                      <code>,</code>
+                      <code>{availableCommands[5]}</code>
                     </TableCell>
                     <TableCell>
                       Receive one byte from input and store it in the byte at
@@ -112,22 +114,22 @@ export function AppBarComponent(): JSX.Element {
                   </TableRow>
                   <TableRow>
                     <TableCell>
-                      <code>[</code>
+                      <code>{availableCommands[6]}</code>
                     </TableCell>
                     <TableCell>
                       If the byte at the data pointer is zero, jump the
                       instruction pointer forward to the command after the
-                      matching <code>]</code> command.
+                      matching <code>{availableCommands[7]}</code> command.
                     </TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>
-                      <code>]</code>
+                      <code>{availableCommands[7]}</code>
                     </TableCell>
                     <TableCell>
                       If the byte at the data pointer is nonzero, jump the
                       instruction pointer back to the command after the matching{" "}
-                      <code>[</code> command.
+                      <code>{availableCommands[6]}</code> command.
                     </TableCell>
                   </TableRow>
                 </TableBody>
