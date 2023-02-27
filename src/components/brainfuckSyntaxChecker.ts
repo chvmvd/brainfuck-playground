@@ -8,8 +8,8 @@ export default function brainfuckSyntaxChecker(
   sourceCode: string
 ): BrainfuckSyntaxStatus {
   const parsedSourceCode = brainfuckParser(sourceCode);
-  let openBracketCount = (parsedSourceCode.match(/\[/g) || []).length;
-  let closeBracketCount = (parsedSourceCode.match(/\]/g) || []).length;
+  let openBracketCount = (parsedSourceCode.join("").match(/\[/g) || []).length;
+  let closeBracketCount = (parsedSourceCode.join("").match(/\]/g) || []).length;
   if (openBracketCount > closeBracketCount) return "Too many open bracket!";
   if (openBracketCount < closeBracketCount) return "Too many close bracket!";
   let cnt = 0;

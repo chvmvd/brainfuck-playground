@@ -1,9 +1,14 @@
-import { brainfuckCommand, BrainfuckCode } from "./brainfuckDefinitions";
+import {
+  brainfuckCommand,
+  type BrainfuckCommand,
+  type BrainfuckCode,
+} from "./brainfuckDefinitions";
 
 export default function brainfuckParser(sourceCode: string): BrainfuckCode {
-  let parsedCode = "";
+  let parsedCode: BrainfuckCode = [];
   for (const char of sourceCode) {
-    if (brainfuckCommand.includes(char)) parsedCode = `${parsedCode}${char}`;
+    if (brainfuckCommand.includes(char))
+      parsedCode.push(char as BrainfuckCommand);
   }
   return parsedCode;
 }

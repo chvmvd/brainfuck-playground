@@ -1,6 +1,6 @@
 import {
   type BrainfuckCommand,
-  BrainfuckCode,
+  type BrainfuckCode,
   defaultMemory,
   type Memory,
 } from "./brainfuckDefinitions";
@@ -52,9 +52,7 @@ export default function brainfuckInterpreter(
   let codePointer = 0;
   let output = "";
   while (codePointer < parsedSourceCode.length) {
-    const command: BrainfuckCommand = parsedSourceCode[
-      codePointer
-    ] as BrainfuckCommand;
+    const command: BrainfuckCommand = parsedSourceCode[codePointer];
     switch (command) {
       case ">":
         pointer++;
