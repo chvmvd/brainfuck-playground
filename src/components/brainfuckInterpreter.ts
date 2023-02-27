@@ -6,6 +6,12 @@ import {
 } from "./brainfuckDefinitions";
 import brainfuckParser from "./brainfuckParser";
 
+/**
+ * get the index of the next corresponding close bracket
+ * @param brainfuckCode an array of brainfuck commands
+ * @param instructionPointer the index of the open bracket
+ * @returns the index of the next corresponding close bracket
+ */
 function getNextCloseBracketIndex(
   brainfuckCode: BrainfuckCode,
   instructionPointer: number
@@ -24,6 +30,12 @@ function getNextCloseBracketIndex(
   return instructionPointer - 1;
 }
 
+/**
+ * get the index of the previous corresponding open bracket
+ * @param brainfuckCode an array of brainfuck commands
+ * @param instructionPointer the index of the close bracket
+ * @returns the index of the previous corresponding open bracket
+ */
 function getPreviousOpenBracketIndex(
   brainfuckCode: BrainfuckCode,
   instructionPointer: number
@@ -42,6 +54,12 @@ function getPreviousOpenBracketIndex(
   return instructionPointer + 1;
 }
 
+/**
+ * interpret brainfuck source code
+ * @param sourceCode source code
+ * @param input input
+ * @returns output, memory state and pointer state
+ */
 export default function brainfuckInterpreter(
   sourceCode: string,
   input: string

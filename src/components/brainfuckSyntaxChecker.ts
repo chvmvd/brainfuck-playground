@@ -1,9 +1,11 @@
-import {
-  type BrainfuckSyntaxStatus,
-  type BrainfuckCode,
-} from "./brainfuckDefinitions";
+import { type BrainfuckSyntaxStatus } from "./brainfuckDefinitions";
 import brainfuckParser from "./brainfuckParser";
 
+/**
+ * check the syntax of the source code
+ * @param sourceCode source code
+ * @returns syntax status
+ */
 export default function brainfuckSyntaxChecker(
   sourceCode: string
 ): BrainfuckSyntaxStatus {
