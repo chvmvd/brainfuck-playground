@@ -30,6 +30,7 @@ function App(): JSX.Element {
   return (
     <>
       <AppBarComponent
+        title={"Brainfuck Playground"}
         GitHubUrl="https://github.com/chvmvd/brainfuck-playground"
         availableCommands={availableBrainfuckCommands}
       />

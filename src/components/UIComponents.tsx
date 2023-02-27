@@ -22,9 +22,11 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import { grey, blue } from "@mui/material/colors";
 
 export function AppBarComponent({
+  title,
   GitHubUrl,
   availableCommands,
 }: {
+  title: string;
   GitHubUrl: string;
   availableCommands: string[];
 }): JSX.Element {
@@ -34,7 +36,7 @@ export function AppBarComponent({
       <AppBar>
         <Toolbar>
           <Typography variant="h5" component="h1" flexGrow={1}>
-            Brainfuck Playground
+            {title}
           </Typography>
           <IconButton color="inherit" size="large" href={GitHubUrl}>
             <GitHubIcon fontSize="inherit" />
