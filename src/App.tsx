@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  brainfuckCommands,
+  availableBrainfuckCommands,
   type BrainfuckSyntaxStatus,
   defaultMemory,
   type Memory,
@@ -30,7 +30,7 @@ function App(): JSX.Element {
     <>
       <AppBarComponent
         GitHubUrl="https://github.com/chvmvd/brainfuck-playground"
-        availableCommands={brainfuckCommands}
+        availableCommands={availableBrainfuckCommands}
       />
       <Toolbar />
       <Box sx={{ m: 2 }}>

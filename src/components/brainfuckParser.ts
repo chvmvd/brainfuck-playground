@@ -1,5 +1,5 @@
 import {
-  brainfuckCommands,
+  availableBrainfuckCommands,
   type BrainfuckCommand,
   type BrainfuckCommands,
 } from "./brainfuckDefinitions";
@@ -12,7 +12,7 @@ import {
 export default function brainfuckParser(sourceCode: string): BrainfuckCommands {
   const brainfuckCommands: BrainfuckCommands = [];
   for (const char of sourceCode) {
-    if (brainfuckCommands.includes(char))
+    if (availableBrainfuckCommands.includes(char))
       brainfuckCommands.push(char as BrainfuckCommand);
   }
   return brainfuckCommands;
