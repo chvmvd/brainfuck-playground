@@ -1,4 +1,4 @@
-export const brainfuckCommand = ["<", ">", "+", "-", ".", ",", "[", "]"];
+export const brainfuckCommands = ["<", ">", "+", "-", ".", ",", "[", "]"];
 export type BrainfuckCommand = "<" | ">" | "+" | "-" | "." | "," | "[" | "]";
 export type BrainfuckCommands = BrainfuckCommand[];
 export const defaultMemory = [...Array(100)].map((_) => 0);
