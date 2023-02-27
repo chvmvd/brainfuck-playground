@@ -1,6 +1,6 @@
 import {
   type BrainfuckCommand,
-  type BrainfuckCode,
+  type BrainfuckCommands,
   defaultMemory,
   type Memory,
 } from "./brainfuckDefinitions";
@@ -8,21 +8,21 @@ import brainfuckParser from "./brainfuckParser";
 
 /**
  * get the index of the next corresponding close bracket
- * @param brainfuckCode an array of brainfuck commands
+ * @param brainfuckCommands an array of brainfuck commands
  * @param instructionPointer the index of the open bracket
  * @returns the index of the next corresponding close bracket
  */
 function getNextCloseBracketIndex(
-  brainfuckCode: BrainfuckCode,
+  brainfuckCommands: BrainfuckCommands,
   instructionPointer: number
 ) {
   let closeBracketCounter = 0;
   instructionPointer++;
   while (closeBracketCounter < 1) {
-    if (brainfuckCode[instructionPointer] === "[") {
+    if (brainfuckCommands[instructionPointer] === "[") {
       closeBracketCounter--;
     }
-    if (brainfuckCode[instructionPointer] === "]") {
+    if (brainfuckCommands[instructionPointer] === "]") {
       closeBracketCounter++;
     }
     instructionPointer++;
@@ -32,21 +32,21 @@ function getNextCloseBracketIndex(
 
 /**
  * get the index of the previous corresponding open bracket
- * @param brainfuckCode an array of brainfuck commands
+ * @param brainfuckCommands an array of brainfuck commands
  * @param instructionPointer the index of the close bracket
  * @returns the index of the previous corresponding open bracket
  */
 function getPreviousOpenBracketIndex(
-  brainfuckCode: BrainfuckCode,
+  brainfuckCommands: BrainfuckCommands,
   instructionPointer: number
 ) {
   let openBracketCounter = 0;
   instructionPointer--;
   while (openBracketCounter < 1) {
-    if (brainfuckCode[instructionPointer] === "]") {
+    if (brainfuckCommands[instructionPointer] === "]") {
       openBracketCounter--;
     }
-    if (brainfuckCode[instructionPointer] === "[") {
+    if (brainfuckCommands[instructionPointer] === "[") {
       openBracketCounter++;
     }
     instructionPointer--;
@@ -64,14 +64,15 @@ export default function brainfuckInterpreter(
   sourceCode: string,
   input: string
 ) {
-  const brainfuckCode = brainfuckParser(sourceCode);
+  const brainfuckCommands = brainfuckParser(sourceCode);
   const memory: Memory = [...defaultMemory];
   let pointer = 0;
   let instructionPointer = 0;
   let output = "";
-  while (instructionPointer < brainfuckCode.length) {
-    const command: BrainfuckCommand = brainfuckCode[instructionPointer];
-    switch (command) {
+  while (instructionPointer < brainfuckCommands.length) {
+    const brainfuckCommand: BrainfuckCommand =
+      brainfuckCommands[instructionPointer];
+    switch (brainfuckCommand) {
       case ">":
         pointer++;
         instructionPointer++;
@@ -100,7 +101,7 @@ export default function brainfuckInterpreter(
       case "[":
         if (memory[pointer] === 0) {
           instructionPointer =
-            getNextCloseBracketIndex(brainfuckCode, instructionPointer) + 1;
+            getNextCloseBracketIndex(brainfuckCommands, instructionPointer) + 1;
         } else {
           instructionPointer++;
         }
@@ -108,7 +109,8 @@ export default function brainfuckInterpreter(
       case "]":
         if (memory[pointer] !== 0) {
           instructionPointer =
-            getPreviousOpenBracketIndex(brainfuckCode, instructionPointer) + 1;
+            getPreviousOpenBracketIndex(brainfuckCommands, instructionPointer) +
+            1;
         } else {
           instructionPointer++;
         }

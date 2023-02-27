@@ -1,7 +1,7 @@
 import {
   brainfuckCommand,
   type BrainfuckCommand,
-  type BrainfuckCode,
+  type BrainfuckCommands,
 } from "./brainfuckDefinitions";
 
 /**
@@ -9,11 +9,11 @@ import {
  * @param sourceCode source code
  * @returns an array of brainfuck commands
  */
-export default function brainfuckParser(sourceCode: string): BrainfuckCode {
-  let brainfuckCode: BrainfuckCode = [];
+export default function brainfuckParser(sourceCode: string): BrainfuckCommands {
+  let brainfuckCommands: BrainfuckCommands = [];
   for (const char of sourceCode) {
     if (brainfuckCommand.includes(char))
-      brainfuckCode.push(char as BrainfuckCommand);
+      brainfuckCommands.push(char as BrainfuckCommand);
   }
-  return brainfuckCode;
+  return brainfuckCommands;
 }
