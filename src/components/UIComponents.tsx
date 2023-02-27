@@ -1,8 +1,5 @@
 import React, { useState, type Dispatch, type SetStateAction } from "react";
-import {
-  type Memory,
-  type BrainfuckSyntaxStatus,
-} from "./brainfuckDefinitions";
+import { type Memory } from "./brainfuckDefinitions";
 import brainfuckInterpreter from "./brainfuckInterpreter";
 import brainfuckSyntaxChecker from "./brainfuckSyntaxChecker";
 import {
@@ -142,12 +139,12 @@ export function AppBarComponent({
   );
 }
 
-export function ProgramComponent({
+export function ProgramComponent<SyntaxStatus extends string>({
   syntaxStatus,
   sourceCode,
   setSourceCode,
 }: {
-  syntaxStatus: BrainfuckSyntaxStatus;
+  syntaxStatus: SyntaxStatus;
   sourceCode: string;
   setSourceCode: Dispatch<SetStateAction<string>>;
 }): JSX.Element {

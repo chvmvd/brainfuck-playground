@@ -36,7 +36,7 @@ function App(): JSX.Element {
       <Box sx={{ m: 2 }}>
         <Stack spacing={2}>
           <Stack spacing={1}>
-            <ProgramComponent
+            <ProgramComponent<BrainfuckSyntaxStatus>
               syntaxStatus={syntaxStatus}
               sourceCode={sourceCode}
               setSourceCode={setSourceCode}
