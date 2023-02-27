@@ -8,38 +8,38 @@ import brainfuckParser from "./brainfuckParser";
 
 function getNextCloseBracketIndex(
   brainfuckCode: BrainfuckCode,
-  codePointer: number
+  instructionPointer: number
 ) {
   let closeBracketCounter = 0;
-  codePointer++;
+  instructionPointer++;
   while (closeBracketCounter < 1) {
-    if (brainfuckCode[codePointer] === "[") {
+    if (brainfuckCode[instructionPointer] === "[") {
       closeBracketCounter--;
     }
-    if (brainfuckCode[codePointer] === "]") {
+    if (brainfuckCode[instructionPointer] === "]") {
       closeBracketCounter++;
     }
-    codePointer++;
+    instructionPointer++;
   }
-  return codePointer - 1;
+  return instructionPointer - 1;
 }
 
 function getPreviousOpenBracketIndex(
   brainfuckCode: BrainfuckCode,
-  codePointer: number
+  instructionPointer: number
 ) {
   let openBracketCounter = 0;
-  codePointer--;
+  instructionPointer--;
   while (openBracketCounter < 1) {
-    if (brainfuckCode[codePointer] === "]") {
+    if (brainfuckCode[instructionPointer] === "]") {
       openBracketCounter--;
     }
-    if (brainfuckCode[codePointer] === "[") {
+    if (brainfuckCode[instructionPointer] === "[") {
       openBracketCounter++;
     }
-    codePointer--;
+    instructionPointer--;
   }
-  return codePointer + 1;
+  return instructionPointer + 1;
 }
 
 export default function brainfuckInterpreter(
@@ -49,50 +49,50 @@ export default function brainfuckInterpreter(
   const brainfuckCode = brainfuckParser(sourceCode);
   const memory: Memory = [...defaultMemory];
   let pointer = 0;
-  let codePointer = 0;
+  let instructionPointer = 0;
   let output = "";
-  while (codePointer < brainfuckCode.length) {
-    const command: BrainfuckCommand = brainfuckCode[codePointer];
+  while (instructionPointer < brainfuckCode.length) {
+    const command: BrainfuckCommand = brainfuckCode[instructionPointer];
     switch (command) {
       case ">":
         pointer++;
-        codePointer++;
+        instructionPointer++;
         break;
       case "<":
         pointer--;
-        codePointer++;
+        instructionPointer++;
         break;
       case "+":
         memory[pointer]++;
-        codePointer++;
+        instructionPointer++;
         break;
       case "-":
         memory[pointer]--;
-        codePointer++;
+        instructionPointer++;
         break;
       case ".":
         output = `${output}${String.fromCharCode(memory[pointer])}`;
-        codePointer++;
+        instructionPointer++;
         break;
       case ",":
         memory[pointer] = input.charCodeAt(0);
         input = input.slice(1);
-        codePointer++;
+        instructionPointer++;
         break;
       case "[":
         if (memory[pointer] === 0) {
-          codePointer =
-            getNextCloseBracketIndex(brainfuckCode, codePointer) + 1;
+          instructionPointer =
+            getNextCloseBracketIndex(brainfuckCode, instructionPointer) + 1;
         } else {
-          codePointer++;
+          instructionPointer++;
         }
         break;
       case "]":
         if (memory[pointer] !== 0) {
-          codePointer =
-            getPreviousOpenBracketIndex(brainfuckCode, codePointer) + 1;
+          instructionPointer =
+            getPreviousOpenBracketIndex(brainfuckCode, instructionPointer) + 1;
         } else {
-          codePointer++;
+          instructionPointer++;
         }
         break;
     }
