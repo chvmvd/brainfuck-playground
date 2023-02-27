@@ -7,16 +7,16 @@ import {
 import brainfuckParser from "./brainfuckParser";
 
 function getNextCloseBracketIndex(
-  parsedSourceCode: BrainfuckCode,
+  brainfuckCode: BrainfuckCode,
   codePointer: number
 ) {
   let closeBracketCounter = 0;
   codePointer++;
   while (closeBracketCounter < 1) {
-    if (parsedSourceCode[codePointer] === "[") {
+    if (brainfuckCode[codePointer] === "[") {
       closeBracketCounter--;
     }
-    if (parsedSourceCode[codePointer] === "]") {
+    if (brainfuckCode[codePointer] === "]") {
       closeBracketCounter++;
     }
     codePointer++;
@@ -25,16 +25,16 @@ function getNextCloseBracketIndex(
 }
 
 function getPreviousOpenBracketIndex(
-  parsedSourceCode: BrainfuckCode,
+  brainfuckCode: BrainfuckCode,
   codePointer: number
 ) {
   let openBracketCounter = 0;
   codePointer--;
   while (openBracketCounter < 1) {
-    if (parsedSourceCode[codePointer] === "]") {
+    if (brainfuckCode[codePointer] === "]") {
       openBracketCounter--;
     }
-    if (parsedSourceCode[codePointer] === "[") {
+    if (brainfuckCode[codePointer] === "[") {
       openBracketCounter++;
     }
     codePointer--;
@@ -46,13 +46,13 @@ export default function brainfuckInterpreter(
   sourceCode: string,
   input: string
 ) {
-  const parsedSourceCode = brainfuckParser(sourceCode);
+  const brainfuckCode = brainfuckParser(sourceCode);
   const memory: Memory = [...defaultMemory];
   let pointer = 0;
   let codePointer = 0;
   let output = "";
-  while (codePointer < parsedSourceCode.length) {
-    const command: BrainfuckCommand = parsedSourceCode[codePointer];
+  while (codePointer < brainfuckCode.length) {
+    const command: BrainfuckCommand = brainfuckCode[codePointer];
     switch (command) {
       case ">":
         pointer++;
@@ -82,7 +82,7 @@ export default function brainfuckInterpreter(
       case "[":
         if (memory[pointer] === 0) {
           codePointer =
-            getNextCloseBracketIndex(parsedSourceCode, codePointer) + 1;
+            getNextCloseBracketIndex(brainfuckCode, codePointer) + 1;
         } else {
           codePointer++;
         }
@@ -90,7 +90,7 @@ export default function brainfuckInterpreter(
       case "]":
         if (memory[pointer] !== 0) {
           codePointer =
-            getPreviousOpenBracketIndex(parsedSourceCode, codePointer) + 1;
+            getPreviousOpenBracketIndex(brainfuckCode, codePointer) + 1;
         } else {
           codePointer++;
         }

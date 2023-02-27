@@ -5,10 +5,10 @@ import {
 } from "./brainfuckDefinitions";
 
 export default function brainfuckParser(sourceCode: string): BrainfuckCode {
-  let parsedCode: BrainfuckCode = [];
+  let brainfuckCode: BrainfuckCode = [];
   for (const char of sourceCode) {
     if (brainfuckCommand.includes(char))
-      parsedCode.push(char as BrainfuckCommand);
+      brainfuckCode.push(char as BrainfuckCommand);
   }
-  return parsedCode;
+  return brainfuckCode;
 }
