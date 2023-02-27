@@ -5,6 +5,7 @@ import {
   defaultMemory,
   type Memory,
 } from "./components/brainfuckDefinitions";
+import brainfuckInterpreter from "./components/brainfuckInterpreter";
 import brainfuckSyntaxChecker from "./components/brainfuckSyntaxChecker";
 import { Toolbar, Box, Stack } from "@mui/material";
 import {
@@ -46,11 +47,14 @@ function App(): JSX.Element {
                 <InputComponent input={input} setInput={setInput} />
               </Box>
               <RunButtonComponent
-                sourceCode={sourceCode}
-                input={input}
-                setOutput={setOutput}
-                setMemory={setMemory}
-                setPointer={setPointer}
+                onClick={() => {
+                  if (brainfuckSyntaxChecker(sourceCode) === "OK") {
+                    const result = brainfuckInterpreter(sourceCode, input);
+                    setOutput(result.output);
+                    setMemory(result.memory);
+                    setPointer(result.pointer);
+                  }
+                }}
               />
             </Stack>
           </Stack>

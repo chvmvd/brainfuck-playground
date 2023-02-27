@@ -1,7 +1,5 @@
 import React, { useState, type Dispatch, type SetStateAction } from "react";
 import { type Memory } from "./brainfuckDefinitions";
-import brainfuckInterpreter from "./brainfuckInterpreter";
-import brainfuckSyntaxChecker from "./brainfuckSyntaxChecker";
 import {
   AppBar,
   Toolbar,
@@ -196,32 +194,13 @@ export function InputComponent({
 }
 
 export function RunButtonComponent({
-  sourceCode,
-  input,
-  setOutput,
-  setMemory,
-  setPointer,
+  onClick,
 }: {
-  sourceCode: string;
-  input: string;
-  setOutput: Dispatch<SetStateAction<string>>;
-  setMemory: Dispatch<SetStateAction<Memory>>;
-  setPointer: Dispatch<SetStateAction<number>>;
+  onClick: () => void;
 }): JSX.Element {
   return (
     <>
-      <Button
-        variant="contained"
-        size="large"
-        onClick={() => {
-          if (brainfuckSyntaxChecker(sourceCode) === "OK") {
-            const result = brainfuckInterpreter(sourceCode, input);
-            setOutput(result.output);
-            setMemory(result.memory);
-            setPointer(result.pointer);
-          }
-        }}
-      >
+      <Button variant="contained" size="large" onClick={onClick}>
         Run
       </Button>
     </>
