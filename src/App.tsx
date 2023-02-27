@@ -48,7 +48,7 @@ function App(): JSX.Element {
               </Box>
               <RunButtonComponent
                 onClick={() => {
-                  if (brainfuckSyntaxChecker(sourceCode) === "OK") {
+                  if (syntaxStatus === "OK") {
                     const result = brainfuckInterpreter(sourceCode, input);
                     setOutput(result.output);
                     setMemory(result.memory);
