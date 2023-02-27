@@ -1,4 +1,9 @@
-import { useState, useEffect, type Dispatch, type SetStateAction } from "react";
+import React, {
+  useState,
+  useEffect,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 import {
   type BrainfuckSyntaxStatus,
   defaultMemory,
@@ -29,7 +34,7 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import { grey, blue } from "@mui/material/colors";
 
-function AppBarComponent() {
+function AppBarComponent(): JSX.Element {
   const [open, setOpen] = useState<boolean>(false);
   return (
     <>
@@ -151,7 +156,7 @@ function ProgramComponent({
   syntaxStatus: BrainfuckSyntaxStatus;
   sourceCode: string;
   setSourceCode: Dispatch<SetStateAction<string>>;
-}) {
+}): JSX.Element {
   return (
     <>
       <Typography variant="h5" component="h2">
@@ -159,7 +164,7 @@ function ProgramComponent({
       </Typography>
       <TextField
         variant="outlined"
-        error={syntaxStatus === "OK" ? false : true}
+        error={syntaxStatus !== "OK"}
         helperText={syntaxStatus === "OK" ? "" : syntaxStatus}
         placeholder="Write your code here."
         multiline
@@ -180,7 +185,7 @@ function InputComponent({
 }: {
   input: string;
   setInput: Dispatch<SetStateAction<string>>;
-}) {
+}): JSX.Element {
   return (
     <>
       <Typography variant="h5" component="h2">
@@ -211,7 +216,7 @@ function RunButtonComponent({
   setOutput: Dispatch<SetStateAction<string>>;
   setMemory: Dispatch<SetStateAction<Memory>>;
   setPointer: Dispatch<SetStateAction<number>>;
-}) {
+}): JSX.Element {
   return (
     <>
       <Button
@@ -232,7 +237,7 @@ function RunButtonComponent({
   );
 }
 
-function OutputComponent({ output }: { output: string }) {
+function OutputComponent({ output }: { output: string }): JSX.Element {
   return (
     <>
       <Typography variant="h5" component="h2">
@@ -265,7 +270,7 @@ function MemoryComponent({
 }: {
   memory: Memory;
   pointer: number;
-}) {
+}): JSX.Element {
   return (
     <>
       <Typography variant="h5" component="h2">
@@ -303,7 +308,7 @@ function MemoryComponent({
   );
 }
 
-function App() {
+function App(): JSX.Element {
   const [sourceCode, setSourceCode] = useState<string>("");
   const [syntaxStatus, setSyntaxStatus] = useState<BrainfuckSyntaxStatus>("OK");
   const [input, setInput] = useState<string>("");

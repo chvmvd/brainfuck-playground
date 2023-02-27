@@ -10,7 +10,7 @@ import {
  * @returns an array of brainfuck commands
  */
 export default function brainfuckParser(sourceCode: string): BrainfuckCommands {
-  let brainfuckCommands: BrainfuckCommands = [];
+  const brainfuckCommands: BrainfuckCommands = [];
   for (const char of sourceCode) {
     if (brainfuckCommand.includes(char))
       brainfuckCommands.push(char as BrainfuckCommand);

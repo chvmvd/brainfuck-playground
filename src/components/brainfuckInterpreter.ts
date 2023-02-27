@@ -15,7 +15,7 @@ import brainfuckParser from "./brainfuckParser";
 function getNextCloseBracketIndex(
   brainfuckCommands: BrainfuckCommands,
   instructionPointer: number
-) {
+): number {
   let closeBracketCounter = 0;
   instructionPointer++;
   while (closeBracketCounter < 1) {
@@ -39,7 +39,7 @@ function getNextCloseBracketIndex(
 function getPreviousOpenBracketIndex(
   brainfuckCommands: BrainfuckCommands,
   instructionPointer: number
-) {
+): number {
   let openBracketCounter = 0;
   instructionPointer--;
   while (openBracketCounter < 1) {
@@ -63,7 +63,7 @@ function getPreviousOpenBracketIndex(
 export default function brainfuckInterpreter(
   sourceCode: string,
   input: string
-) {
+): { output: string; memory: Memory; pointer: number } {
   const brainfuckCommands = brainfuckParser(sourceCode);
   const memory: Memory = [...defaultMemory];
   let pointer = 0;
@@ -117,5 +117,5 @@ export default function brainfuckInterpreter(
         break;
     }
   }
-  return { output: output, memory: memory, pointer: pointer };
+  return { output, memory, pointer };
 }
