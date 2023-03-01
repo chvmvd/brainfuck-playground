@@ -1,12 +1,12 @@
 # Brainfuck Playground
 
-[![React](https://img.shields.io/badge/React-555.svg?logo=react)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-1e1e20.svg?logo=vite)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React-555.svg?logo=react)](https://github.com/facebook/react)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC.svg?logo=typescript&logoColor=white)](https://github.com/microsoft/TypeScript)
+[![Vite](https://img.shields.io/badge/Vite-1e1e20.svg?logo=vite)](https://github.com/vitejs/vite)
 [![Build and Deploy](https://github.com/chvmvd/brainfuck-playground/actions/workflows/deploy.yml/badge.svg)](https://github.com/chvmvd/brainfuck-playground/actions/workflows/deploy.yml)
 [![Prettier](https://github.com/chvmvd/brainfuck-playground/actions/workflows/prettier.yml/badge.svg)](https://github.com/chvmvd/brainfuck-playground/actions/workflows/prettier.yml)
 [![ESLint](https://github.com/chvmvd/brainfuck-playground/actions/workflows/eslint.yml/badge.svg)](https://github.com/chvmvd/brainfuck-playground/actions/workflows/eslint.yml)
-![LICENSE](https://img.shields.io/badge/license-MIT-informational.svg)
+![license](https://img.shields.io/badge/license-MIT-informational.svg)
 ![PRs](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 
 [日本語版 README はこちら](README-ja.md)
@@ -47,8 +47,7 @@ Below is a Hello World! program by Brainfuck.
 
 ### Requirements
 
-- [Node.js](https://nodejs.org/en/)
-- [npm](https://www.npmjs.com/)
+- [npm](https://github.com/npm/cli)
 
 ### Installation
 
@@ -67,6 +66,7 @@ After running the command above, visit [http://localhost:5173/](http://localhost
 ## License
 
 Brainfuck Playground is licensed under the [MIT](https://opensource.org/licenses/MIT) license.
+
 Copyright © 2023 WATAHIKI Yuto.
 
 ## Contributing
