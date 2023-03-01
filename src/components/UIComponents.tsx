@@ -61,7 +61,7 @@ export function AppBarComponent({
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>Character</TableCell>
+                    <TableCell>Command</TableCell>
                     <TableCell>Meaning</TableCell>
                   </TableRow>
                 </TableHead>
