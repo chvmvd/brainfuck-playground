@@ -65,7 +65,7 @@ npm run dev
 
 ## ライセンス
 
-Brainfuck Playground は [MIT](https://opensource.org/licenses/MIT) ライセンスのもとで公開されています。
+Brainfuck Playground は [MIT](LICENSE) ライセンスのもとで公開されています。
 
 Copyright © 2023 WATAHIKI Yuto.
 
